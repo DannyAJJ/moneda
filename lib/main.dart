@@ -58,11 +58,11 @@ int seleccionado = 0 ;
       ),
       );
   }
-  Widget seleccionadividsa(IconData iconop){
+  Widget seleccionadividsa(){
     return ElevatedButton(onPressed: (){
 
-    },
-    child: Icon(iconop, color: Colors.white,));
+    },child: 
+     Icon(medir(),));
   } 
 
 
@@ -78,18 +78,19 @@ int seleccionado = 0 ;
             Stack(
               alignment: Alignment.bottomLeft,
               children: [
-                Image.asset("imagenes/doge.jpg"),
+                Image.asset("imagenes/doge2.jpg"),
                 Row(
-                  children: [
-                    seleccionadividsa(Icons.ac_unit_rounded)
-                  ],
-                ),
-                Column(
                   
                   children: [
-                  Container(
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 50),
+                      child: seleccionadividsa(),
+                    ),
+                    
+                    Container(
                     alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.symmetric(horizontal: 37),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 50),
+                    
                   child: const Text(
                     "Monto a Convertir",
                     style: TextStyle(
@@ -99,9 +100,10 @@ int seleccionado = 0 ;
                     ),
                   ),
                   ),
-                 
+                  ],
+                ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
                 controller: globales.textleer,
                 canRequestFocus: false,
@@ -112,34 +114,13 @@ int seleccionado = 0 ;
                   color: Colors.white,
                   fontSize: 20,
                 ),
-                decoration: const InputDecoration(
-                prefixIcon:  Icon(Icons.attach_money_outlined),
-                //suffixIcon: Icon(Icons.clear),
-                /*labelText: 'Monto a Convertir.',*/
-                /*hintText: 'Igrese Monto.',*/
-                /*helperText: 'Monto deseado a converit:',*/
+                decoration:  InputDecoration(
+                prefixIcon:  Icon(globales.iconoactual),
                 border: InputBorder.none, 
                 prefixIconColor: Colors.white,
-                
                 ),
               ),
               ),
-              /*
-              DropdownButtonFormField(
-                value: "Dolar",
-                decoration: const InputDecoration(border: OutlineInputBorder(),) ,
-                items: moneda.map((e) {
-                  return DropdownMenuItem(
-                    value: e,
-                    child: Text(e),
-                    );
-                }).toList(),
-                onChanged: (value) {
-                  valor1=value;
-                  convertir(valor1, valor2, globales.textedid, globales.textleer);
-                },),*/
-                ],
-                )
               ],
             ),
             SizedBox(
@@ -341,4 +322,8 @@ Widget botonpad(BuildContext context, String? value,IconData? icon, TextEditingC
           fontWeight: FontWeight.w700
       )): Icon(icon,color: const Color.fromRGBO(255, 238, 226, 1),)
     );
+  }
+  medir(){
+    IconData icono= globales.iconoactual;
+    return icono;
   }
