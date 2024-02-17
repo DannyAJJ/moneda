@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Moneda',
       theme: ThemeData(
         fontFamily: "Roboto",
-        colorScheme: ColorScheme.fromSeed( seedColor: const Color.fromRGBO(73, 13, 179, 1)),
+        colorScheme: ColorScheme.fromSeed( seedColor: const Color.fromRGBO(21, 13, 179, 1)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -37,7 +37,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+int seleccionado = 0 ;
 
+  Widget botonradio(String texto,int index){
+    return OutlinedButton(
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),),
+        side: MaterialStateBorderSide.resolveWith((states) => BorderSide(color: (seleccionado == index) ? Colors.deepPurpleAccent : Colors.white)),
+      ),
+      onPressed: (){
+        setState(() {
+          seleccionado = index;
+        });
+      },
+     child: Text(
+      texto,
+      style: TextStyle(
+        color:(seleccionado == index) ? Colors.deepPurpleAccent : Colors.white
+      ),
+      ),
+      );
+  }
+  Widget seleccionadividsa(IconData iconop){
+    return ElevatedButton(onPressed: (){
+
+    },
+    child: Icon(iconop, color: Colors.white,));
+  } 
 
 
   @override
@@ -53,22 +79,30 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.bottomLeft,
               children: [
                 Image.asset("imagenes/doge.jpg"),
+                Row(
+                  children: [
+                    seleccionadividsa(Icons.ac_unit_rounded)
+                  ],
+                ),
                 Column(
+                  
                   children: [
                   Container(
                     alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 37),
                   child: const Text(
                     "Monto a Convertir",
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.white,
+                      color: Color.fromRGBO(148, 140, 140, 1),
+                      fontStyle: FontStyle.italic
                     ),
                   ),
                   ),
                  
-                  
-              TextField(
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: TextField(
                 controller: globales.textleer,
                 canRequestFocus: false,
                 onChanged:(value) {
@@ -79,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 20,
                 ),
                 decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.attach_money_outlined),
+                prefixIcon:  Icon(Icons.attach_money_outlined),
                 //suffixIcon: Icon(Icons.clear),
                 /*labelText: 'Monto a Convertir.',*/
                 /*hintText: 'Igrese Monto.',*/
@@ -87,10 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 border: InputBorder.none, 
                 prefixIconColor: Colors.white,
                 
-                
                 ),
               ),
-            
+              ),
+              /*
               DropdownButtonFormField(
                 value: "Dolar",
                 decoration: const InputDecoration(border: OutlineInputBorder(),) ,
@@ -103,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onChanged: (value) {
                   valor1=value;
                   convertir(valor1, valor2, globales.textedid, globales.textleer);
-                },),
+                },),*/
                 ],
                 )
               ],
@@ -253,7 +287,7 @@ convertir (String? valor1,String? valor2,TextEditingController editar, TextEditi
         control= control*0.93;
       break;
   }
-  editar.text=control.toString();
+  editar.text=(((control*100).roundToDouble())/100).toString();
 }
 /*bool comas (bool coma){
   if (coma) {return false;}else {return true;}
