@@ -49,8 +49,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child:
         Column(
           children: [
+            Image.asset("imagenes/A.png"),
+            Stack(
+              children: [
+                Image.asset("imagenes/doge.jpg"),
+                Container( 
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: const Text(
+                    "hola",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                )
+              ],
+            ),
             SizedBox(
-              height:MediaQuery.of(context).size.height*0.65,
+              /*height:MediaQuery.of(context).size.height*0.65,*/
               width: MediaQuery.of(context).size.width*0.8,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
