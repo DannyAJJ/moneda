@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Moneda',
       theme: ThemeData(
-        
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: "Roboto",
+        colorScheme: ColorScheme.fromSeed( seedColor: const Color.fromRGBO(73, 13, 179, 1)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -49,44 +49,44 @@ class _MyHomePageState extends State<MyHomePage> {
         child:
         Column(
           children: [
-            Image.asset("imagenes/A.png"),
             Stack(
+              alignment: Alignment.bottomLeft,
               children: [
                 Image.asset("imagenes/doge.jpg"),
-                Container( 
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                Column(
+                  children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: const Text(
-                    "hola",
+                    "Monto a Convertir",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
+                      color: Colors.white,
                     ),
                   ),
-                )
-              ],
-            ),
-            SizedBox(
-              /*height:MediaQuery.of(context).size.height*0.65,*/
-              width: MediaQuery.of(context).size.width*0.8,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text(
-                    'Convertidor de Divisas',
                   ),
-          
+                 
+                  
               TextField(
                 controller: globales.textleer,
                 canRequestFocus: false,
                 onChanged:(value) {
                   convertir(valor1, valor2, globales.textedid, globales.textleer);
                 },
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
                 decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.attach_money_outlined),
                 //suffixIcon: Icon(Icons.clear),
-                labelText: 'Divisa Ingresada.',
-                hintText: 'Igrese Monto.',
-                helperText: 'seleccione tipo de divisa ingresada:',
-                border: OutlineInputBorder(),
+                /*labelText: 'Monto a Convertir.',*/
+                /*hintText: 'Igrese Monto.',*/
+                /*helperText: 'Monto deseado a converit:',*/
+                border: InputBorder.none, 
+                prefixIconColor: Colors.white,
+                
                 
                 ),
               ),
@@ -104,6 +104,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   valor1=value;
                   convertir(valor1, valor2, globales.textedid, globales.textleer);
                 },),
+                ],
+                )
+              ],
+            ),
+            SizedBox(
+              /*height:MediaQuery.of(context).size.height*0.65,*/
+              width: MediaQuery.of(context).size.width*0.8,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  
 
                 SizedBox(height: MediaQuery.of(context).size.height*0.025,),
 
