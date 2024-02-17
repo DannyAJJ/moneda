@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'globales.dart' as globales;
+import 'botonpop.dart' as popsito;
 
 const List<String> moneda = <String>['Bolivar', 'Dolar', 'Yen', 'Euro'];
 double resp= 0;
@@ -39,33 +39,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 int seleccionado = 0 ;
 
-  Widget botonradio(String texto,int index){
-    return OutlinedButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),),
-        side: MaterialStateBorderSide.resolveWith((states) => BorderSide(color: (seleccionado == index) ? Colors.deepPurpleAccent : Colors.white)),
-      ),
-      onPressed: (){
-        setState(() {
-          seleccionado = index;
-        });
-      },
-     child: Text(
-      texto,
-      style: TextStyle(
-        color:(seleccionado == index) ? Colors.deepPurpleAccent : Colors.white
-      ),
-      ),
-      );
-  }
-  Widget seleccionadividsa(){
-    return ElevatedButton(onPressed: (){
-
-    },child: 
-     Icon(medir(),));
-  } 
-
-
+  
   @override
   Widget build(BuildContext context) {
    
@@ -78,13 +52,13 @@ int seleccionado = 0 ;
             Stack(
               alignment: Alignment.bottomLeft,
               children: [
-                Image.asset("imagenes/doge2.jpg"),
+                Image.asset("imagenes/doge2.jpg",width: MediaQuery.of(context).size.width),
                 Row(
                   
                   children: [
                     Container(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 50),
-                      child: seleccionadividsa(),
+                      child: const popsito.Botondivisa(),
                     ),
                     
                     Container(
@@ -123,54 +97,60 @@ int seleccionado = 0 ;
               ),
               ],
             ),
-            SizedBox(
-              /*height:MediaQuery.of(context).size.height*0.65,*/
-              width: MediaQuery.of(context).size.width*0.8,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  
-
-                SizedBox(height: MediaQuery.of(context).size.height*0.025,),
-
-                TextField(
-                controller: globales.textedid,
-                mouseCursor: SystemMouseCursors.basic,
-                canRequestFocus: false,
-                readOnly: true,
-                decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.attach_money_outlined),
-                //suffixIcon: Icon(Icons.clear),
-                labelText: 'Cambio de Divisa.',
-                hintText: 'Este campo es automatico.',
-                helperText: 'seleccione tipo de divisa objetivo:',
-                border: OutlineInputBorder(),
+            Expanded(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width*0.8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    
+              
+                  SizedBox(height: MediaQuery.of(context).size.height*0.025,),
+              
+                  TextField(
+                  controller: globales.textedid,
+                  mouseCursor: SystemMouseCursors.basic,
+                  canRequestFocus: false,
+                  readOnly: true,
+                  decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.attach_money_outlined),
+                  //suffixIcon: Icon(Icons.clear),
+                  labelText: 'Cambio de Divisa.',
+                  hintText: 'Este campo es automatico.',
+                  helperText: 'seleccione tipo de divisa objetivo:',
+                  border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
-
-              DropdownButtonFormField(
-                value: "Bolivar",
-                decoration: const InputDecoration(border: OutlineInputBorder()) ,
-                items: moneda.map((e2) {
-                  return DropdownMenuItem(
-                    value: e2,
-                    child: Text(e2),
-                    );
-                }).toList(),
-                onChanged: (value) {
-                  valor2=value;
-                  convertir(valor1, valor2, globales.textedid, globales.textleer);
-                },),
-          
-            ],
-            
+              
+                DropdownButtonFormField(
+                  value: "Bolivar",
+                  decoration: const InputDecoration(border: OutlineInputBorder()) ,
+                  items: moneda.map((e2) {
+                    return DropdownMenuItem(
+                      value: e2,
+                      child: Text(e2),
+                      );
+                  }).toList(),
+                  onChanged: (value) {
+                    valor2=value;
+                    convertir(valor1, valor2, globales.textedid, globales.textleer);
+                  },),
+                        
+              ],
+              
+                        ),
+                        
+                      ),
+            ),
+        Container(
+          alignment: Alignment.bottomCenter,
+          width: MediaQuery.of(context).size.width*0.8,
+          height:MediaQuery.of(context).size.height*0.25,
+          decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color:const Color.fromRGBO(41, 40, 40, 1),
           ),
           
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height:MediaQuery.of(context).size.height*0.35,
-          color:const Color.fromRGBO(41, 40, 40, 1),
           child: 
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -306,7 +286,7 @@ Widget botonpad(BuildContext context, String? value,IconData? icon, TextEditingC
       fixedSize: MaterialStateProperty.resolveWith((states) => 
         Size(
           (MediaQuery.of(context).size.width/4),
-          (MediaQuery.of(context).size.height/2.5/5)
+          (MediaQuery.of(context).size.height/2.5/7)
           )),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
@@ -327,3 +307,4 @@ Widget botonpad(BuildContext context, String? value,IconData? icon, TextEditingC
     IconData icono= globales.iconoactual;
     return icono;
   }
+ 
