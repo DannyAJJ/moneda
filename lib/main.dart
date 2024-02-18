@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneda/lista.dart';
 import 'globales.dart' as globales;
 import 'botonpop.dart' as popsito;
 
@@ -98,9 +99,66 @@ int seleccionado = 0 ;
               ],
             ),
             Expanded(
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Container( color: Colors.blue,child: const Listaview(),),
+                  Container(
+                        width: MediaQuery.of(context).size.width*0.6,
+                        height:MediaQuery.of(context).size.height*0.25,
+                        decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color:const Color.fromRGBO(41, 40, 40, 0.624),
+                        ),
+                        
+                        child: 
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      botonpad(context, '7', null, globales.textleer),
+                      botonpad(context, '8', null, globales.textleer),
+                      botonpad(context, '9', null, globales.textleer),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      botonpad(context, '4', null, globales.textleer),
+                      botonpad(context, '5', null, globales.textleer),
+                      botonpad(context, '6', null, globales.textleer),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      botonpad(context, '1', null, globales.textleer),
+                      botonpad(context, '2', null, globales.textleer),
+                      botonpad(context, '3', null, globales.textleer),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      botonpad(context, null, Icons.backspace_outlined, globales.textleer),
+                      botonpad(context, '0', null, globales.textleer),
+                      botonpad(context, '.', null,globales.textleer),
+                    ],
+                  )
+                ],
+              ),
+                      ),
+                      
+                ],
+              ),
+            )
+              
+              /*
               child: SizedBox(
                 width: MediaQuery.of(context).size.width*0.8,
-                child: Column(
+                child: Coslumn(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     
@@ -140,56 +198,8 @@ int seleccionado = 0 ;
               
                         ),
                         
-                      ),
-            ),
-        Container(
-          alignment: Alignment.bottomCenter,
-          width: MediaQuery.of(context).size.width*0.8,
-          height:MediaQuery.of(context).size.height*0.25,
-          decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color:const Color.fromRGBO(41, 40, 40, 1),
-          ),
-          
-          child: 
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    botonpad(context, '7', null, globales.textleer),
-                    botonpad(context, '8', null, globales.textleer),
-                    botonpad(context, '9', null, globales.textleer),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    botonpad(context, '4', null, globales.textleer),
-                    botonpad(context, '5', null, globales.textleer),
-                    botonpad(context, '6', null, globales.textleer),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    botonpad(context, '1', null, globales.textleer),
-                    botonpad(context, '2', null, globales.textleer),
-                    botonpad(context, '3', null, globales.textleer),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    botonpad(context, null, Icons.backspace_outlined, globales.textleer),
-                    botonpad(context, '0', null, globales.textleer),
-                    botonpad(context, '.', null,globales.textleer),
-                  ],
-                )
-              ],
-            ),
-        ),
+                      ),*/
+            
         
 
           ],
@@ -280,12 +290,12 @@ Widget botonpad(BuildContext context, String? value,IconData? icon, TextEditingC
       convertir(valor1, valor2, globales.textedid, globales.textleer);
     }, 
     style: ButtonStyle(
-      backgroundColor: MaterialStateColor.resolveWith((states) => const Color.fromRGBO(68, 71, 74, 1)),
+      backgroundColor: MaterialStateColor.resolveWith((states) => const Color.fromRGBO(68, 71, 74, 0.616)),
       side: MaterialStateBorderSide.resolveWith((states) => const BorderSide(color: Color.fromRGBO(41, 40, 40, 1))),
       //overlayColor: MaterialStateColor.resolveWith((states) => const Color.fromRGBO(97, 100, 103, 1)),
       fixedSize: MaterialStateProperty.resolveWith((states) => 
         Size(
-          (MediaQuery.of(context).size.width/4),
+          (MediaQuery.of(context).size.width/6),
           (MediaQuery.of(context).size.height/2.5/7)
           )),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
