@@ -11,7 +11,7 @@ class Botondivisa extends StatelessWidget {
     return GestureDetector(
       onTap:() { showPopover(context: context, bodyBuilder: (context) => const principal.Menu(),
       width: 200,
-      height: 203,
+      height: 256,
       backgroundColor: const Color.fromRGBO(69, 39, 160, 1),
       direction: PopoverDirection.bottom
       );
@@ -19,7 +19,7 @@ class Botondivisa extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width/9,
-        height: MediaQuery.of(context).size.height/24,
+        height: MediaQuery.of(context).size.height/18,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(10),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moneda/lista.dart';
+import 'package:flutter/services.dart';
 import 'globales.dart' as globales;
 import 'botonpop.dart' as popsito;
-
-const List<String> moneda = <String>['Bolivar', 'Dolar', 'Yen', 'Euro'];
 double resp= 0;
 String? valor1="Dolar", valor2="Bolivar";
 void main() {
@@ -38,9 +36,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-int seleccionado = 0 ;
-
-  
   @override
   Widget build(BuildContext context) {
    
@@ -58,19 +53,19 @@ int seleccionado = 0 ;
                   
                   children: [
                     Container(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 50),
+                      padding: const EdgeInsets.fromLTRB(30, 0, 10, 50),
                       child: const popsito.Botondivisa(),
                     ),
                     
                     Container(
                     alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 50),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 10, 70),
                     
                   child: const Text(
                     "Monto a Convertir",
                     style: TextStyle(
                       fontSize: 20,
-                      color: Color.fromRGBO(148, 140, 140, 1),
+                      color: Color.fromRGBO(230, 224, 224, 1),
                       fontStyle: FontStyle.italic
                     ),
                   ),
@@ -78,10 +73,11 @@ int seleccionado = 0 ;
                   ],
                 ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.fromLTRB(85,0,0,40),
                     child: TextField(
                 controller: globales.textleer,
                 canRequestFocus: false,
+                
                 onChanged:(value) {
                   convertir(valor1, valor2, globales.textedid, globales.textleer);
                 },
@@ -92,6 +88,8 @@ int seleccionado = 0 ;
                 decoration:  InputDecoration(
                 prefixIcon:  Icon(globales.iconoactual),
                 border: InputBorder.none, 
+                hintText: '0',
+                hintStyle: const TextStyle(color: Colors.white),
                 prefixIconColor: Colors.white,
                 ),
               ),
@@ -103,28 +101,27 @@ int seleccionado = 0 ;
                 alignment: Alignment.bottomCenter,
                 children: [
                   Container( color: const Color.fromRGBO(152, 120, 186, 1),child:
-                  GridView.count(crossAxisCount: 1
-                  , childAspectRatio: 5,
+                  GridView.count(crossAxisCount: 2
+                  , childAspectRatio: 2.7,
                   children: [
                    
-              Container(
-                
-                width: MediaQuery.of(context).size.width,
-                color: Colors.deepPurple[700],
-                child: const Text('data',style: TextStyle(fontSize: 20),),
-              ),
-              Container(
-                
-                width: MediaQuery.of(context).size.width,
-                color: Colors.deepPurple[600],
-                child: const Text('data',style: TextStyle(fontSize: 20),),
-              ),
-              Container(
-                
-                width: MediaQuery.of(context).size.width,
-                color: Colors.deepPurple[500],
-                child: const Text('data',style: TextStyle(fontSize: 20),),
-              ),
+              disp(context, Icons.attach_money, 'Dolar Uds', globales.dolar),
+              disp(context, Icons.euro, 'Euro', globales.euro),
+              disp(context, Icons.currency_yen, 'Yen', globales.yen),
+              disp(context, Icons.currency_pound, 'Libra', globales.libra),
+              disp(context, Icons.currency_yuan, 'Yuan', globales.yuan),
+              disp(context, Icons.cancel, 'Bolivar', globales.bolivar),
+              disp(context, Icons.attach_money, 'Peso Arg', globales.arg),
+              disp(context, Icons.pets, 'Dogecoin', globales.doge),
+              disp(context, Icons.cancel, 'otro', globales.otro),
+              disp(context, Icons.cancel, 'otro', globales.otro),
+              disp(context, Icons.cancel, 'otro', globales.otro),
+              disp(context, Icons.cancel, 'otro', globales.otro),
+              disp(context, Icons.cancel, 'otro', globales.otro),
+              disp(context, Icons.cancel, 'otro', globales.otro),
+              disp(context, Icons.cancel, 'otro', globales.otro),
+              disp(context, Icons.cancel, 'otro', globales.otro),
+              
                   ],)
                   ),
                   Container(
@@ -254,35 +251,43 @@ convertir (String? valor1,String? valor2,TextEditingController editar, TextEditi
     editar.text= "";
     return;
   }
-    switch (valor1) {
-      case "Dolar":
+    switch (globales.moneda) {
+      case 0:
         control = lectura;
       break;
-      case "Bolivar":
-        control= lectura/36.29;
-      break;
-      case "Yen":
-        control= lectura/148.62;
-      break;
-      case "Euro":
+      case 1:
         control= lectura/0.93;
       break;
+      case 2:
+        control= lectura/150.19;
+      break;
+      case 3:
+        control= lectura/0.79;
+      break;
+      case 4:
+        control= lectura/7.21;
+      break;
+      case 5:
+        control= lectura/37.52;
+      break;
+      case 6:
+        control= lectura/834.41;
+      break;
+      case 7:
+        control= lectura/11.83;
+      break;
   }
-  switch (valor2) {
-      case "Dolar":
-        control= control;
-      break;
-      case "Bolivar":
-        control= control*36.29;
-      break;
-      case "Yen":
-        control= control*148.62;
-      break;
-      case "Euro":
-        control= control*0.93;
-      break;
-  }
-  editar.text=(((control*100).roundToDouble())/100).toString();
+  globales.tabulado=(((control*100).roundToDouble())/100).toString();
+
+  globales.dolar.text = globales.tabulado;
+  globales.euro.text = ((((control*0.93)*100).roundToDouble())/100).toString();
+  globales.yen.text = ((((control*150.19)*100).roundToDouble())/100).toString();
+  globales.libra.text = ((((control*0.79)*100).roundToDouble())/100).toString();
+  globales.yuan.text = ((((control*7.21)*100).roundToDouble())/100).toString();
+  globales.bolivar.text = ((((control*37.52)*100).roundToDouble())/100).toString();
+  globales.arg.text = ((((control*834.41)*100).roundToDouble())/100).toString();
+  globales.doge.text = ((((control*11.83)*100).roundToDouble())/100).toString();
+
 }
 /*bool comas (bool coma){
   if (coma) {return false;}else {return true;}
@@ -290,18 +295,53 @@ convertir (String? valor1,String? valor2,TextEditingController editar, TextEditi
 boton (String presionado, TextEditingController leer){
  switch (presionado){
   case 'b':
+    // ignore: unnecessary_null_comparison
     if (leer.text.characters.last=='.'){globales.coma=false;}
+    if (leer.text.length==1){leer.text= '0';}else{
     leer.text = leer.text.characters.getRange(0,leer.text.length-1).toString();
+    }
   break;
   case '.':
-    globales.coma= true;
-    leer.text = leer.text + presionado ;
+    if(leer.text!=''){
+      globales.coma= true;
+      leer.text = leer.text + presionado ;
+    }
+    
   break;
-  default:
-    leer.text = leer.text + presionado ;
+  default: 
+    if (leer.text=='0'){leer.text=presionado;}else{
+     leer.text = leer.text + presionado ;
+    }
+    
   break;
  }
 }
+
+Widget disp(BuildContext context,IconData icono, String? textod, TextEditingController control ){
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.02),
+  width: MediaQuery.of(context).size.width,
+  color: Colors.white,
+  child:  Column( children: [
+    Row(children: [
+  Icon(icono, size: 35),
+  Text(textod.toString() ,style: const TextStyle(fontSize: 25))
+  ],),
+  TextField(
+    controller:control,
+    showCursor: false,
+    mouseCursor: SystemMouseCursors.basic,
+    canRequestFocus: false,
+    decoration: const InputDecoration(
+      hintText: '0',
+      border: InputBorder.none
+    ),
+    style: const TextStyle(fontSize: 25,),
+  ),
+  /*Text(control.text,style: const TextStyle(fontSize: 25),)*/],) );
+              
+}
+
 Widget botonpad(BuildContext context, String? value,IconData? icon, TextEditingController leer) {
     return ElevatedButton(onPressed: (){
 
@@ -312,6 +352,7 @@ Widget botonpad(BuildContext context, String? value,IconData? icon, TextEditingC
           boton('b', leer);
       }
       convertir(valor1, valor2, globales.textedid, globales.textleer);
+
     }, 
     style: ButtonStyle(
       backgroundColor: MaterialStateColor.resolveWith((states) => const Color.fromRGBO(68, 71, 74, 0.616)),
@@ -340,5 +381,32 @@ Widget botonpad(BuildContext context, String? value,IconData? icon, TextEditingC
   medir(){
     IconData icono= globales.iconoactual;
     return icono;
+  }
+  Widget salida(BuildContext context){
+    return ElevatedButton(
+      onPressed: (){
+
+      },
+      style: ButtonStyle(
+      backgroundColor: MaterialStateColor.resolveWith((states) => const Color.fromRGBO(68, 71, 74, 0.616)),
+      side: MaterialStateBorderSide.resolveWith((states) => const BorderSide(color: Color.fromRGBO(41, 40, 40, 1))),
+      fixedSize: MaterialStateProperty.resolveWith((states) => 
+        Size(
+          (MediaQuery.of(context).size.width/6),
+          (MediaQuery.of(context).size.height/2.5/7)
+          )),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10))
+        ),
+      
+      ),
+      child:
+       Row(
+        children: [
+         Icon(Icons.rate_review),
+         Text('Desplegar Teclado')
+        ],)
+        );
   }
  
