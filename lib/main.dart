@@ -102,7 +102,31 @@ int seleccionado = 0 ;
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  Container( color: Colors.blue,child: const Listaview(),),
+                  Container( color: const Color.fromRGBO(152, 120, 186, 1),child:
+                  GridView.count(crossAxisCount: 1
+                  , childAspectRatio: 5,
+                  children: [
+                   
+              Container(
+                
+                width: MediaQuery.of(context).size.width,
+                color: Colors.deepPurple[700],
+                child: const Text('data',style: TextStyle(fontSize: 20),),
+              ),
+              Container(
+                
+                width: MediaQuery.of(context).size.width,
+                color: Colors.deepPurple[600],
+                child: const Text('data',style: TextStyle(fontSize: 20),),
+              ),
+              Container(
+                
+                width: MediaQuery.of(context).size.width,
+                color: Colors.deepPurple[500],
+                child: const Text('data',style: TextStyle(fontSize: 20),),
+              ),
+                  ],)
+                  ),
                   Container(
                         width: MediaQuery.of(context).size.width*0.6,
                         height:MediaQuery.of(context).size.height*0.25,
